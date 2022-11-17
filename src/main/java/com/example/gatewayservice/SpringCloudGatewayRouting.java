@@ -10,10 +10,34 @@ public class SpringCloudGatewayRouting {
     @Bean
     public RouteLocator configureRoute(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("productID", r->r.path("/api/products/**").uri("http://localhost:1111")) //static routing
-                .route("categoryId", r->r.path("/api/categories/**").uri("http://localhost:1111")) //static routing
-                .route("userId", r->r.path("/api/users/**").uri("http://localhost:2222")) //static routing
-//                .route("orderId", r->r.path("/order/**").uri("lb://service2")) //dynamic routing
+//                .route(r->r.path("/users/**").uri("http://localhost:8081")) //static routing
+//                .route(r->r.path("/categories/**").uri("http://localhost:8081")) //static routing
+//                .route(r->r.path("/products/**").uri("http://localhost:8081")) //static routing
+
+                .route(r -> r
+                        .path("/api/categories/**")
+                        .uri("lb://BE-PRODUCT")
+                ) //dynamic routing
+                .route(r -> r
+                        .path("/api/users/**")
+                        .uri("lb://BE-USER")
+                ) //dynamic routing
+                .route(r -> r
+                        .path("/api/products/**")
+                        .uri("lb://BE-PRODUCT")
+                ) //dynamic routing
+                .route(r -> r
+                        .path("/categories/**")
+                        .uri("lb://FONTEND")
+                )
+                .route(r -> r
+                        .path("/users/**")
+                        .uri("lb://FONTEND")
+                )
+                .route(r -> r
+                        .path("/products/**")
+                        .uri("lb://FONTEND")
+                )
                 .build();
     }
 }
