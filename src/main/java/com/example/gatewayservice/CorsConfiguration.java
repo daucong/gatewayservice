@@ -15,7 +15,7 @@ public class CorsConfiguration extends
     @Bean
     public CorsWebFilter corsWebFilter() {
         final CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOrigins(Collections.singletonList("http://localhost:8081"));
+        corsConfig.setAllowedOrigins(Collections.singletonList("*"));
         corsConfig.setMaxAge(3600L);
         corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfig.addAllowedHeader("*");
